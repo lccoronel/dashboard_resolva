@@ -26,6 +26,9 @@
       "@typescript-eslint"
   ],
   "rules": {
+    "no-param-reassign": "off",
+    "camelcase": "off",
+    "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
     "no-use-before-define": "off",
     "react-hooks/rules-of-hooks": "error",

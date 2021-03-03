@@ -1,13 +1,15 @@
 import styled from 'styled-components';
-import backgroundImg from '../../assets/back.jpg';
+import { darken } from 'polished';
+
+import backgroundImg from '../../../../assets/back.jpg';
 
 export const Container = styled.div`
-  background: url(${backgroundImg}) ;
+  background: url(${backgroundImg});
   width: 100vw;
   height: 100vh;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: #FDE3E4;
+  background-color: var(--lightPink);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,7 +17,7 @@ export const Container = styled.div`
 
   @media (max-width: 1200px) {
     & {
-      background: #FDE3E4;
+      background: var(--lightPink);
     }
   }
 
@@ -24,7 +26,7 @@ export const Container = styled.div`
   }
 
   .containerWhite {
-    background-color: #fff;
+    background-color: var(--white);
     border-radius: 10px;
     width: 583px;
     height: 474px;
@@ -46,7 +48,7 @@ export const Container = styled.div`
 
       button {
         background-color: #333;
-        color: #fff;
+        color: var(--white);
         font-family: 'Roboto', sans-serif;
         border: 0;
         width: 64%;
@@ -54,6 +56,10 @@ export const Container = styled.div`
         padding: 10px;
         border-radius: 10px;
         font-weight: 500;
+
+        &:hover {
+          background: ${darken(0.5, '#333')}
+        }
       }
     }
 
