@@ -55,4 +55,42 @@ export const Container = styled.div`
       }
     }
   }
+
+  section {
+    .styles {
+      display: flex;
+      flex-direction: column;
+      width: 200px;
+      background-color: var(--white);
+      border-radius: 10px;
+
+      .style {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+
+        .title {
+          font-size: 13px;
+          color: var(--textColor);
+          font-weight: 400;
+          font-family: "Roboto", sans-serif;
+          text-align: center;
+        }
+
+        .description {
+          font-size: 18px;
+          color: var(--textColor);
+          font-weight: 400;
+          font-family: "Roboto", sans-serif;
+          text-align: center;
+        }
+      }
+    }
+  }
 `;

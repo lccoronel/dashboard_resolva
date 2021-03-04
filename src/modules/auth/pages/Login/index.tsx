@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
+import { useHistory } from 'react-router-dom';
 import Input from '../../components/Input';
 import logoIcon from '../../../../assets/icon.png';
 import { Container } from './styles';
@@ -13,12 +14,14 @@ interface FormProps {
 }
 
 const Login: React.FC = () => {
-  const { SignIn, user } = useAuth();
+  const { SignIn } = useAuth();
+  const { push } = useHistory();
 
   const formRef = useRef<FormHandles>(null);
   const handleSubmit = useCallback(async ({ email, password }: FormProps) => {
     SignIn({ username: email, password });
-  }, [SignIn]);
+    push('/home');
+  }, [SignIn, push]);
 
   return (
     <Container>
