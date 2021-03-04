@@ -14,7 +14,7 @@ const Route: React.FC<RouteProps> = ({ isPrivate = false, component: Component, 
   return (
     <ReactDOMRoute
       {...rest}
-      render={() => (isPrivate === !!user ? (
+      render={() => (isPrivate === !!user.token ? (
         <Component />
       ) : (
         <Redirect

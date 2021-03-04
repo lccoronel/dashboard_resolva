@@ -17,7 +17,7 @@ interface CredentialsProps{
 }
 
 interface AuthContextProps {
-  name: string;
+  isColsultant: boolean;
   SignIn(credentials: CredentialsProps): Promise<void>;
   user: AuthState;
 }
@@ -26,7 +26,7 @@ const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
 const AuthProvider: React.FC = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem('@ResolvaConsultant:access');
+    const token = localStorage.getItem('@ResolvaConsultant:token');
     const firstName = localStorage.getItem('@ResolvaConsultant:fisrtName');
     const lastName = localStorage.getItem('@ResolvaConsultant:lastName');
     const isConsultant = localStorage.getItem('@ResolvaConsultant:isConsultant');
@@ -72,7 +72,7 @@ const AuthProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ name: 'Diego', SignIn, user: data }}>
+    <AuthContext.Provider value={{ SignIn, user: data, isColsultant: data.isConsultant }}>
       {children}
     </AuthContext.Provider>
   );

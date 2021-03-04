@@ -11,7 +11,7 @@ export const Container = styled.div`
     line-height: 28px;
   }
 
-  p {
+  .subTitle {
     font-size: 24px;
     font-weight: 400;
     color: var(--textColor);
@@ -19,78 +19,40 @@ export const Container = styled.div`
     font-family: 'Roboto', sans-serif;
   }
 
-  div {
+  section {
     display: flex;
-    margin-top: 10px;
+    margin-top: 30px;
+  }
+`;
 
-    .containerPhoto {
-      border: 5px solid #fff;
-      border-radius: 50%;
-      width: 186px;
-      height: 186px;
+export const DivProfile = styled.section`
+  display: flex;
+  margin-top: 10px;
 
-      img {
-        width: 186px;
-        height: 186px;
-        border-radius: 50%;
-      }
-    }
-
-    .containerName {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      margin-left: 25px;
-
-      .welcome {
-        font-size: 22px;
-        font-weight: 400;
-        color: vat(--textColor);
-      }
-
-      .name {
-        font-size: 36px;
-        color: vat(--textColor);
-        font-weight: 500;
-      }
-    }
+  img {
+    width: 186px;
+    height: 186px;
+    border-radius: 50%;
+    border: 5px solid var(--white);
   }
 
-  section {
-    .styles {
-      display: flex;
-      flex-direction: column;
-      width: 200px;
-      background-color: var(--white);
-      border-radius: 10px;
+  .containerName {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 25px;
 
-      .style {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    .welcome {
+      font-size: 22px;
+      font-weight: 400;
+      color: vat(--textColor);
+    }
 
-        img {
-          width: 20px;
-          height: 20px;
-        }
-
-        .title {
-          font-size: 13px;
-          color: var(--textColor);
-          font-weight: 400;
-          font-family: "Roboto", sans-serif;
-          text-align: center;
-        }
-
-        .description {
-          font-size: 18px;
-          color: var(--textColor);
-          font-weight: 400;
-          font-family: "Roboto", sans-serif;
-          text-align: center;
-        }
-      }
+    .name {
+      font-size: 36px;
+      color: vat(--textColor);
+      font-weight: 500;
+      margin-top: 10px;
     }
   }
 `;

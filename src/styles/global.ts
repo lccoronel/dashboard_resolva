@@ -28,6 +28,10 @@ export default createGlobalStyle`
     font-family: 'Roboto', sans-serif;
   }
 
+  p {
+    font-family: 'Roboto', sans-serif;
+  }
+
   button {
     cursor: pointer;
   }

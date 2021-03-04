@@ -1,12 +1,15 @@
 import React from 'react';
 
 import TabBar from '../../components/TabBar';
-import photoimg from '../../assets/Foto.png';
-import chartIcon from '../../assets/chart.png';
-import styleIcon from '../../assets/Estilo.png';
+import StylesProfile from '../../components/StylesProfile';
+import TasksInDay from '../../components/TasksInDay';
+import RealeasedTasks from '../../components/RealeasedTasks';
+import Revenues from '../../components/Revenues';
 
-import { Container } from './styles';
+import photoimg from '../../assets/Foto.png';
 import { useAuth } from '../../../../hooks/auth';
+
+import { Container, DivProfile } from './styles';
 
 const Home: React.FC = () => {
   const { user } = useAuth();
@@ -15,32 +18,25 @@ const Home: React.FC = () => {
     <TabBar>
       <Container>
         <h2>Fique sempre atenta ao seus agendamentos.</h2>
-        <p>Vamos evitar cancelamentos!</p>
+        <p className="subTitle">Vamos evitar cancelamentos!</p>
 
-        <div>
-          <div className="containerPhoto">
-            <img src={photoimg} alt="perfil" />
-          </div>
+        <DivProfile>
+          <img src={photoimg} alt="perfil" />
 
           <div className="containerName">
             <p className="welcome">Bem vinda,</p>
-            <h3 className="name">{`${user.firstName}${user.lastName}`}</h3>
+            <h3 className="name">{`${user.firstName} ${user.lastName}`}</h3>
           </div>
-        </div>
+        </DivProfile>
 
         <section>
-          <div className="styles">
-            <div className="style">
-              <img src={chartIcon} alt="Cartela de cores" />
-              <p className="title">Cartela de cor</p>
-              <p className="description">Primavera clara</p>
-            </div>
-            <div className="style">
-              <img src={styleIcon} alt="Estilo predominante" />
-              <p className="title">Cartela de cor</p>
-              <p className="description">Predominante</p>
-            </div>
-          </div>
+          <StylesProfile />
+          <TasksInDay />
+        </section>
+
+        <section>
+          <RealeasedTasks />
+          <Revenues />
         </section>
       </Container>
     </TabBar>
