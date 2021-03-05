@@ -20,6 +20,10 @@ export const Container = styled.div`
     border-top-right-radius: 70px;
     border-bottom-right-radius: 70px;
 
+    @media(max-width: 600px) {
+      width: 0;
+    }
+
     .icon {
       margin: 30px 60px;
     }
@@ -41,6 +45,11 @@ export const Container = styled.div`
     flex: 1;
     background-color: var(--lightGrey);
     padding: 65px 50px 0;
+    overflow: scroll;
+
+    @media(max-width: 600px) {
+      padding: 35px 30px 0;
+    }
   }
 `;
 

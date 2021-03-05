@@ -7,6 +7,7 @@ export default createGlobalStyle`
     --lightPink: #FDE3E4;
     --white: #fff;
     --textColor: #404040;
+    --borderColor: #e2e2e2;
   }
 
   * {

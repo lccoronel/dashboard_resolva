@@ -4,21 +4,6 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
 
-  h2 {
-    font-size: 30px;
-    font-weight: 400;
-    color: var(--textColor);
-    line-height: 28px;
-  }
-
-  .subTitle {
-    font-size: 24px;
-    font-weight: 400;
-    color: var(--textColor);
-    line-height: 28px;
-    font-family: 'Roboto', sans-serif;
-  }
-
   section {
     display: flex;
     margin-top: 30px;

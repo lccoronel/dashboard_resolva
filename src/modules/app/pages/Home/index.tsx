@@ -5,6 +5,7 @@ import StylesProfile from '../../components/StylesProfile';
 import TasksInDay from '../../components/TasksInDay';
 import RealeasedTasks from '../../components/RealeasedTasks';
 import Revenues from '../../components/Revenues';
+import TextWelcome from '../../components/TextWelcome';
 
 import photoimg from '../../assets/Foto.png';
 import { useAuth } from '../../../../hooks/auth';
@@ -17,8 +18,7 @@ const Home: React.FC = () => {
   return (
     <TabBar>
       <Container>
-        <h2>Fique sempre atenta ao seus agendamentos.</h2>
-        <p className="subTitle">Vamos evitar cancelamentos!</p>
+        <TextWelcome />
 
         <DivProfile>
           <img src={photoimg} alt="perfil" />
