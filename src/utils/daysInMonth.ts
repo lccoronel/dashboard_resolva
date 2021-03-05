@@ -10,7 +10,7 @@ function daysInMonth(month: number, year: number): DaysCalendarDTO[] {
 
   let lastDayPreviousMonth = new Date(year, month - 1, 0).getDate();
   days.push(lastDayPreviousMonth);
-  for (let i = 0; i < startDayOfWeek; i++) {
+  for (let i = 1; i < startDayOfWeek; i++) {
     lastDayPreviousMonth -= 1;
     days.push(lastDayPreviousMonth);
   }

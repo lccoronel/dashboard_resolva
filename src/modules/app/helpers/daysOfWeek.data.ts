@@ -10,7 +10,7 @@ export const daysOfWeek: DaysOfWeekProps[] = [
   },
   {
     id: 1,
-    day: 'Seq',
+    day: 'Seg',
   },
   {
     id: 2,

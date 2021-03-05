@@ -189,11 +189,11 @@ export const DivDay = styled.div<DivDayProps>`
 `;
 
 export const SelectAppointments = styled(Select)`
-  width: 40%;
+  width: 80%;
   border-radius: 10px;
   background-color: var(--white);
 
   @media(max-width: 600px) {
-    width: 55%;
+    width: 65%;
   }
 `;
