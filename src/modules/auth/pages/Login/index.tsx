@@ -1,6 +1,8 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import Input from '../../components/Input';
 import logoIcon from '../../../../assets/icon.png';
@@ -15,9 +17,39 @@ interface FormProps {
 const Login: React.FC = () => {
   const { SignIn } = useAuth();
 
+  const [loading, setLoading] = useState(false);
+
   const formRef = useRef<FormHandles>(null);
   const handleSubmit = useCallback(async ({ email, password }: FormProps) => {
-    SignIn({ username: email, password });
+    try {
+      setLoading(true);
+      formRef.current?.setErrors({});
+
+      const schema = Yup.object().shape({
+        email: Yup.string()
+          .required('E-mail obrigatório')
+          .email('Digite um e-mail valido'),
+        password: Yup.string().required('Senha obrigatoria'),
+      });
+
+      await schema.validate({ email, password }, {
+        abortEarly: false,
+      });
+
+      await SignIn({ username: email, password });
+      toast.success('Bem vinda!');
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        err.message === '2 errors occurred'
+          ? toast.error('Preencha as credenciais')
+          : toast.error(err.message);
+        return;
+      }
+
+      toast.error('Não foi possivel fazer login');
+    } finally {
+      setLoading(false);
+    }
   }, [SignIn]);
 
   return (
@@ -28,7 +60,7 @@ const Login: React.FC = () => {
         <Form onSubmit={handleSubmit} ref={formRef}>
           <Input name="email" placeholder="E-mail" type="email" defaultValue="self.gustavocorrea@gmail.com" />
           <Input name="password" placeholder="Senha" type="password" defaultValue="Chv5taffvs" />
-          <button type="submit">Entrar</button>
+          <button type="submit">{loading ? 'Caregando...' : 'Entrar'}</button>
         </Form>
         <p>© 2021 Resolva - Todos os direitos reservados</p>
       </div>

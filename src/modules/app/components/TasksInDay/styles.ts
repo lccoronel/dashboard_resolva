@@ -9,6 +9,13 @@ export const Container = styled.div`
   margin-left: 30px;
   border: 1px solid #e2e2e2;
 
+  @media(max-width: 600px) {
+    & {
+      margin-left: 0px;
+      margin-top: 20px;
+    }
+  }
+
   .titleTask {
     font-size: 17px;
     line-height: 17px;

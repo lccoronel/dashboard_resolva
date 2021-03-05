@@ -6,12 +6,19 @@ import { options } from '../../helpers/options.data';
 import { OptionsMenuDTO } from '../../../../dtos/OptionsMenu';
 
 import { Container, ButtonOption } from './styles';
+import { useAuth } from '../../../../hooks/auth';
 
 const TabBar: React.FC = ({ children }) => {
+  const { SignOut } = useAuth();
   const [optionsMenu, setOptionsMenu] = useState<OptionsMenuDTO[]>(options);
   const { push } = useHistory();
 
   const handleNavigateOption = useCallback((route: string) => {
+    if (route === 'left') {
+      SignOut();
+      return;
+    }
+
     const optionsMenuWithOtionSelected = optionsMenu.map((option) => {
       route === option.route
         ? option.showing = true
@@ -22,7 +29,7 @@ const TabBar: React.FC = ({ children }) => {
 
     setOptionsMenu(optionsMenuWithOtionSelected);
     push(route);
-  }, [push, optionsMenu]);
+  }, [push, optionsMenu, SignOut]);
 
   return (
     <Container>

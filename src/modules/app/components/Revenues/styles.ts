@@ -12,6 +12,13 @@ export const Container = styled.div`
   height: 148px;
   border: 1px solid #e2e2e2;
 
+  @media(max-width: 600px) {
+    & {
+      margin-left: 0px;
+      margin-top: 20px;
+    }
+  }
+
   h2 {
     font-size: 32px;
   }

@@ -29,12 +29,12 @@ const Home: React.FC = () => {
           </div>
         </DivProfile>
 
-        <section>
+        <section className="content-home">
           <StylesProfile />
           <TasksInDay />
         </section>
 
-        <section>
+        <section className="content-home">
           <RealeasedTasks />
           <Revenues />
         </section>

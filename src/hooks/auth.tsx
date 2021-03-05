@@ -19,6 +19,7 @@ interface CredentialsProps{
 interface AuthContextProps {
   isColsultant: boolean;
   SignIn(credentials: CredentialsProps): Promise<void>;
+  SignOut(): void;
   user: AuthState;
 }
 
@@ -71,8 +72,16 @@ const AuthProvider: React.FC = ({ children }) => {
     });
   }, []);
 
+  const SignOut = useCallback(() => {
+    localStorage.clear();
+    setData({} as AuthState);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ SignIn, user: data, isColsultant: data.isConsultant }}>
+    <AuthContext.Provider value={{
+      SignIn, SignOut, user: data, isColsultant: data.isConsultant,
+    }}
+    >
       {children}
     </AuthContext.Provider>
   );
