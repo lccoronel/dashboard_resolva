@@ -64,43 +64,56 @@ const Appointments: React.FC = () => {
       <Container>
         <TextWelcome />
 
-        <DivCalendar>
-          <section>
-            <h2>{`${monthName}/${year}`}</h2>
+        <section className="content">
+          <div className="left">
+            <DivCalendar>
+              <section>
+                <h2>{`${monthName}/${year}`}</h2>
 
-            <div>
-              <button type="button" onClick={() => handleChangeMonth('down')}>
-                <img src={arrowLeftIcon} alt="Flecha para Esquerda" />
+                <div>
+                  <button type="button" onClick={() => handleChangeMonth('down')}>
+                    <img src={arrowLeftIcon} alt="Flecha para Esquerda" />
+                  </button>
+                  <button type="button" onClick={() => handleChangeMonth('up')}>
+                    <img src={arrowRightIcon} alt="Flecha para Direita" />
+                  </button>
+                </div>
+              </section>
+
+              <DivDaysOfWeek>
+                {daysOfWeek.map((day) => (
+                  <p>{day.day}</p>
+                ))}
+              </DivDaysOfWeek>
+
+              <DivDaysOfMonth>
+                {days?.map((day, index) => (
+                  <DivDay key={index} thisMonth={day.thisMonth}>
+                    <p key={index}>{day.day}</p>
+                  </DivDay>
+                ))}
+              </DivDaysOfMonth>
+            </DivCalendar>
+
+            <p className="description-calendar">Selecione uma data para ver os agendamentos</p>
+
+            <section className="select">
+              <SelectAppointments />
+
+              <button type="button">
+                Buscar
               </button>
-              <button type="button" onClick={() => handleChangeMonth('up')}>
-                <img src={arrowRightIcon} alt="Flecha para Direita" />
-              </button>
-            </div>
-          </section>
+            </section>
 
-          <DivDaysOfWeek>
-            {daysOfWeek.map((day) => (
-              <p>{day.day}</p>
-            ))}
-          </DivDaysOfWeek>
+            <section className="checkbox">
+              <input type="checkbox" />
+              <p className="checbox-text">Apenas agendamentos pendentes</p>
+            </section>
+          </div>
 
-          <DivDaysOfMonth>
-            {days?.map((day, index) => (
-              <DivDay key={index} thisMonth={day.thisMonth}>
-                <p key={index}>{day.day}</p>
-              </DivDay>
-            ))}
-          </DivDaysOfMonth>
-        </DivCalendar>
-
-        <p className="description-calendar">Selecione uma data para ver os agendamentos</p>
-
-        <section className="select">
-          <SelectAppointments />
-
-          <button type="button">
-            Buscar
-          </button>
+          <div className="right">
+            <h2>Agendamentos</h2>
+          </div>
         </section>
       </Container>
     </TabBar>

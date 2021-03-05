@@ -10,31 +10,87 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
 
-  .description-calendar {
-    margin-top: 15px;
-    margin-left: 15px;
-  }
-
-  .select {
+  .content {
     display: flex;
-    align-items: center;
-    margin-top: 50px;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 40px;
 
-    button {
-      margin-left: 20px;
-      width: 173px;
-      height: 40px;
+    .left {
+      width: 60%;
+
+      .description-calendar {
+        margin-top: 15px;
+        margin-left: 15px;
+      }
+
+      .select {
+        display: flex;
+        align-items: center;
+        margin-top: 50px;
+
+        button {
+          margin-left: 20px;
+          width: 173px;
+          height: 40px;
+          border-radius: 10px;
+          background-color: #5a5a5a;
+          border: 0;
+
+          font-size: 18px;
+          color: var(--white);
+          font-weight: 500;
+          text-align: center;
+
+          &:hover {
+            background-color: ${darken(0.5, '#5a5a5a')};
+          }
+        }
+      }
+
+      .checkbox {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+
+        .checbox-text {
+          margin-left: 10px;
+          font-size: 13px;
+          color: #333333;
+          font-weight: 400;
+        }
+      }
+    }
+
+    .right {
+      width: 354px;
+      height: 742px;
       border-radius: 10px;
-      background-color: #5a5a5a;
-      border: 0;
+      background-color: var(--white);
+      border: 1px solid #e2e2e2;
+      margin-left: 30px;
+      padding: 15px;
 
-      font-size: 18px;
-      color: var(--white);
-      font-weight: 500;
-      text-align: center;
+      h2 {
+        font-size: 26px;
+        color: #5a5a5a;
+        font-weight: 300;
+      }
+    }
 
-      &:hover {
-        background-color: ${darken(0.5, '#5a5a5a')};
+    @media(max-width: 600px) {
+      & {
+        display: flex;
+        flex-direction: column;
+
+        .left {
+          width: 100%;
+        }
+
+        .right {
+          margin: 30px 0;
+          width: 90%;
+        }
       }
     }
   }
@@ -42,10 +98,9 @@ export const Container = styled.div`
 
 export const DivCalendar = styled.div`
   background-color: var(--white);
-  width: 55%;
+  width: 100%;
   border-radius: 10px;
   border: 1px solid var(--borderColor);
-  margin-top: 40px;
 
   section {
     display: flex;
