@@ -24,11 +24,12 @@ import {
 
 const Appointments: React.FC = () => {
   const { user } = useAuth();
+
   const [month, setMonth] = useState(getMonth(new Date()) + 1);
   const [year, setYear] = useState(getYear(new Date()));
   const [days, setDays] = useState<DaysCalendarDTO[]>(daysInMonth(month, year));
   const [done, setDone] = useState(true);
-  // const [consulteesId, setConsulteesId] = useState([]);
+  const consultees = [{ value: 3023, label: 'Nome do cliente 1' }, { value: 3023, label: 'Nome do cliente 2' }];
 
   useEffect(() => {
     const lastDayThisMonth = new Date(year, month, 0).getDate();
@@ -53,8 +54,6 @@ const Appointments: React.FC = () => {
       });
 
       setDays(daysWithAppointments);
-
-      response.data.map((appointment: any) => appointment.consulteeId);
     });
   }, [month, year, user, done]);
 
@@ -129,7 +128,7 @@ const Appointments: React.FC = () => {
             <p className="description-calendar">Selecione uma data para ver os agendamentos</p>
 
             <section className="select">
-              <SelectAppointments />
+              <SelectAppointments options={consultees} />
 
               <button type="button">
                 Buscar
