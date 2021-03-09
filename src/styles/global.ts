@@ -6,6 +6,7 @@ export default createGlobalStyle`
     --lightGrey: #F4F4F4;
     --grey: #333;
     --lightPink: #FDE3E4;
+    --pink: #f4d1d1;
     --white: #fff;
     --textColor: #404040;
     --borderColor: #e2e2e2;
@@ -30,7 +31,7 @@ export default createGlobalStyle`
     font-family: 'Roboto', sans-serif;
   }
 
-  p {
+  p, span {
     font-family: 'Roboto', sans-serif;
   }
 

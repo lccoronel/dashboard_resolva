@@ -11,7 +11,8 @@ export const Container = styled.div`
   height: 148px;
   border: 1px solid #e2e2e2;
 
-  .tasksNumber {
+  span {
     font-size: 50px;
+    font-weight: 500;
   }
 `;

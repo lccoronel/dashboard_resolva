@@ -4,10 +4,8 @@ const api = axios.create({
   baseURL: 'https://api.resolvaclub.com',
 });
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('@ResolvaConsultant:token');
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
+export const microServiceApi = axios.create({
+  baseURL: 'https://api-consultoras.resolvaclub.com',
 });
 
 export default api;

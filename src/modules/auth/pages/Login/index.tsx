@@ -16,10 +16,10 @@ interface FormProps {
 
 const Login: React.FC = () => {
   const { SignIn } = useAuth();
+  const formRef = useRef<FormHandles>(null);
 
   const [loading, setLoading] = useState(false);
 
-  const formRef = useRef<FormHandles>(null);
   const handleSubmit = useCallback(async ({ email, password }: FormProps) => {
     try {
       setLoading(true);

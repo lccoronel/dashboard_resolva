@@ -2,14 +2,8 @@ import React, {
   createContext, useCallback, useContext, useState,
 } from 'react';
 
+import { ConsultantDTO } from '../dtos/ConsultantDTO';
 import api from '../services/api';
-
-interface AuthState {
-  token: string;
-  lastName: string;
-  firstName: string;
-  isConsultant: boolean;
-}
 
 interface CredentialsProps{
   username: string;
@@ -17,69 +11,60 @@ interface CredentialsProps{
 }
 
 interface AuthContextProps {
-  isColsultant: boolean;
   SignIn(credentials: CredentialsProps): Promise<void>;
   SignOut(): void;
-  user: AuthState;
+  user: ConsultantDTO;
 }
 
 const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
 const AuthProvider: React.FC = ({ children }) => {
-  const [data, setData] = useState<AuthState>(() => {
+  const [data, setData] = useState<ConsultantDTO>(() => {
     const token = localStorage.getItem('@ResolvaConsultant:token');
-    const firstName = localStorage.getItem('@ResolvaConsultant:fisrtName');
-    const lastName = localStorage.getItem('@ResolvaConsultant:lastName');
-    const isConsultant = localStorage.getItem('@ResolvaConsultant:isConsultant');
+    const user = localStorage.getItem('@ResolvaConsultant:user');
 
-    if (token && firstName && lastName && isConsultant) {
+    if (token && user) {
       return {
-        token, firstName, lastName, isConsultant: JSON.parse(isConsultant),
+        token, user: JSON.parse(user),
       };
     }
 
-    return {} as AuthState;
+    return {} as ConsultantDTO;
   });
 
   const SignIn = useCallback(async ({ username, password }: CredentialsProps) => {
-    const response = await api.post('/auth/', {
-      username,
-      password,
-    });
-
-    const {
-      access, first_name, last_name,
-    } = response.data;
-
-    localStorage.setItem('@ResolvaConsultant:token', access);
-    localStorage.setItem('@ResolvaConsultant:fisrtName', first_name);
-    localStorage.setItem('@ResolvaConsultant:lastName', last_name);
+    const response = await api.post('/auth/', { username, password });
+    const { access, first_name, last_name } = response.data;
 
     const responseInfo = await api.get('users/info/', {
-      headers: {
-        Authorization: `Bearer ${access}`,
-      },
+      headers: { Authorization: `Bearer ${access}` },
     });
-
-    const { is_consultant } = responseInfo.data;
-    localStorage.setItem('@ResolvaConsultant:isConsultant', JSON.stringify(is_consultant));
-
-    setData({
-      token: access,
+    const {
+      id, is_consultant, color_chart, primary_style,
+    } = responseInfo.data;
+    const user = {
+      id,
       firstName: first_name,
       lastName: last_name,
       isConsultant: is_consultant,
-    });
+      colorChart: color_chart,
+      primaryStyle: primary_style,
+    };
+
+    localStorage.setItem('@ResolvaConsultant:token', access);
+    localStorage.setItem('@ResolvaConsultant:user', JSON.stringify(user));
+
+    setData({ token: access, user });
   }, []);
 
   const SignOut = useCallback(() => {
     localStorage.clear();
-    setData({} as AuthState);
+    setData({} as ConsultantDTO);
   }, []);
 
   return (
     <AuthContext.Provider value={{
-      SignIn, SignOut, user: data, isColsultant: data.isConsultant,
+      SignIn, SignOut, user: data,
     }}
     >
       {children}

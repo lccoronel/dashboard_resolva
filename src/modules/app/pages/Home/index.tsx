@@ -3,7 +3,7 @@ import React from 'react';
 import TabBar from '../../components/TabBar';
 import StylesProfile from '../../components/StylesProfile';
 import TasksInDay from '../../components/TasksInDay';
-import RealeasedTasks from '../../components/RealeasedTasks';
+import ReleasedTasks from '../../components/RealeasedTasks';
 import Revenues from '../../components/Revenues';
 import TextWelcome from '../../components/TextWelcome';
 
@@ -25,17 +25,20 @@ const Home: React.FC = () => {
 
           <div className="containerName">
             <p className="welcome">Bem vinda,</p>
-            <h3 className="name">{`${user.firstName} ${user.lastName}`}</h3>
+            <h3 className="name">{`${user.user.firstName} ${user.user.lastName}`}</h3>
           </div>
         </DivProfile>
 
         <section className="content-home">
-          <StylesProfile />
-          <TasksInDay />
+          <StylesProfile
+            colorChart={user.user.colorChart}
+            primaryStyle={user.user.primaryStyle}
+          />
+          <TasksInDay value={10} />
         </section>
 
         <section className="content-home">
-          <RealeasedTasks />
+          <ReleasedTasks value={6} />
           <Revenues />
         </section>
       </Container>

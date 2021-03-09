@@ -5,28 +5,55 @@ import { getMonth, getYear } from 'date-fns';
 
 import TabBar from '../../components/TabBar';
 import TextWelcome from '../../components/TextWelcome';
+import DayInCalendar from '../../components/DayInCalendar';
+import Scheduling from '../../components/Scheduling';
 
 import arrowLeftIcon from '../../assets/arrowLeft.png';
 import arrowRightIcon from '../../assets/arrowRight.png';
 
-import { DaysCalendarDTO } from '../../../../dtos/DaysInCalendarDTO';
+import daysInMonth from '../../../../utils/daysInMonth';
 import listMonths from '../../helpers/months.data';
 import { daysOfWeek } from '../../helpers/daysOfWeek.data';
-import daysInMonth from '../../../../utils/daysInMonth';
+import { DaysCalendarDTO } from '../../../../dtos/DaysInCalendarDTO';
+import { microServiceApi } from '../../../../services/api';
+import { useAuth } from '../../../../hooks/auth';
 
 import {
-  Container, DivCalendar, DivDaysOfWeek, DivDaysOfMonth, DivDay,
-  SelectAppointments,
+  Container, DivCalendar, DivDaysOfWeek, DivDaysOfMonth, SelectAppointments,
 } from './styles';
 
 const Appointments: React.FC = () => {
+  const { user } = useAuth();
   const [month, setMonth] = useState(getMonth(new Date()) + 1);
   const [year, setYear] = useState(getYear(new Date()));
-  const [days, setDays] = useState<DaysCalendarDTO[]>();
+  const [days, setDays] = useState<DaysCalendarDTO[]>(daysInMonth(month, year));
+  const [done, setDone] = useState(true);
 
   useEffect(() => {
-    setDays(daysInMonth(month, year));
-  }, [month, year]);
+    const lastDayThisMonth = new Date(year, month, 0).getDate();
+    microServiceApi.get(`/v1/profiles/${user.user.id}/consultant-schedulings`, {
+      headers: { Authorization: `JWT ${user.token}` },
+      params: {
+        start_gte: `${year}-${month}-01T00:00:00-03:00`,
+        start_lte: `${year}-${month}-${lastDayThisMonth}T23:59:00-03:00`,
+        done: done === false ? done : null,
+      },
+    }).then((response) => {
+      const markedDays = response.data.map((appointment: any) => {
+        const day = appointment.start.substring(8, 10);
+        return day;
+      });
+
+      const calendarDays = daysInMonth(month, year);
+
+      const daysWithAppointments = calendarDays.map((day) => {
+        day.appointment = markedDays.includes(day.day);
+        return day;
+      });
+
+      setDays(daysWithAppointments);
+    });
+  }, [month, year, user, done]);
 
   const handleChangeMonth = useCallback((action: 'up' | 'down') => {
     switch (action) {
@@ -82,15 +109,16 @@ const Appointments: React.FC = () => {
 
               <DivDaysOfWeek>
                 {daysOfWeek.map((day) => (
-                  <p>{day.day}</p>
+                  <p key={day.id}>{day.day}</p>
                 ))}
               </DivDaysOfWeek>
 
               <DivDaysOfMonth>
                 {days?.map((day, index) => (
-                  <DivDay key={index} thisMonth={day.thisMonth}>
-                    <p key={index}>{day.day}</p>
-                  </DivDay>
+                  <DayInCalendar
+                    key={index}
+                    day={day}
+                  />
                 ))}
               </DivDaysOfMonth>
             </DivCalendar>
@@ -106,13 +134,14 @@ const Appointments: React.FC = () => {
             </section>
 
             <section className="checkbox">
-              <input type="checkbox" />
+              <input type="checkbox" onClick={() => setDone((check) => !check)} />
               <p className="checbox-text">Apenas agendamentos pendentes</p>
             </section>
           </div>
 
           <div className="right">
             <h2>Agendamentos</h2>
+            <Scheduling />
           </div>
         </section>
       </Container>

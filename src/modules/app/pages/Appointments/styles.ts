@@ -1,10 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import Select from 'react-select';
 import { darken } from 'polished';
-
-interface DivDayProps {
-  thisMonth: boolean;
-}
 
 export const Container = styled.div`
   width: 100%;
@@ -161,31 +157,8 @@ export const DivDaysOfWeek = styled.div`
 
 export const DivDaysOfMonth = styled.div`
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-template-columns: repeat(7, 14.31%);
   margin-top: 10px;
-
-
-`;
-
-export const DivDay = styled.div<DivDayProps>`
-  border: 0.5px solid #eee;
-  padding: 10px;
-  height: 60px;
-
-  ${(props) => !props.thisMonth && css`
-    background-color: var(--lightGrey);
-  `}
-
-  p {
-    font-size: 14px;
-    color: #dcdcdc;
-    font-weight: 400;
-    text-align: right;
-
-    ${(props) => props.thisMonth && css`
-      color: var(--grey);
-    `}
-  }
 `;
 
 export const SelectAppointments = styled(Select)`
