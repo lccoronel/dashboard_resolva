@@ -5,6 +5,7 @@ export interface ConsultantDTO {
     lastName: string;
     firstName: string;
     isConsultant: boolean;
+    clients: number[];
     colorChart: {
       season: string;
       tone: string;

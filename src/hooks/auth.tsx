@@ -40,7 +40,7 @@ const AuthProvider: React.FC = ({ children }) => {
       headers: { Authorization: `Bearer ${access}` },
     });
     const {
-      id, is_consultant, color_chart, primary_style,
+      id, is_consultant, color_chart, primary_style, consultees,
     } = responseInfo.data;
     const user = {
       id,
@@ -49,6 +49,7 @@ const AuthProvider: React.FC = ({ children }) => {
       isConsultant: is_consultant,
       colorChart: color_chart,
       primaryStyle: primary_style,
+      clients: consultees,
     };
 
     localStorage.setItem('@ResolvaConsultant:token', access);

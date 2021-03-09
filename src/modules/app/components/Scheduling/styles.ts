@@ -1,3 +1,4 @@
+import { darken } from 'polished';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -68,9 +69,17 @@ export const Container = styled.div`
     color: #333333;
     font-weight: 500;
 
+    &:hover {
+      background-color: ${darken(0.05, '#f4d1d1')}
+    }
+
     & + button {
       background-color: var(--grey);
       color: var(--white);
+    }
+
+    & + button:hover {
+      background-color: ${darken(0.05, '#333')}
     }
 
     img {
