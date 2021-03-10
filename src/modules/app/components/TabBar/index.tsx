@@ -40,6 +40,7 @@ const TabBar: React.FC = ({ children }) => {
         <section>
           {optionsMenu.map((option) => (
             <ButtonOption
+              key={option.id}
               type="button"
               onClick={() => handleNavigateOption(option.route)}
               selected={option.showing}

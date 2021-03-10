@@ -5,7 +5,7 @@ const api = axios.create({
 });
 
 export const microServiceApi = axios.create({
-  baseURL: 'https://api-consultoras.resolvaclub.com',
+  baseURL: 'https://api-calendar.resolvaclub.com',
 });
 
 export default api;

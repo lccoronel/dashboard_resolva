@@ -32,12 +32,12 @@ const Appointments: React.FC = () => {
   const consultees = [{ value: 3023, label: 'Nome do cliente 1' }, { value: 3023, label: 'Nome do cliente 2' }];
 
   useEffect(() => {
-    const lastDayThisMonth = new Date(year, month, 0).getDate();
-    microServiceApi.get(`/v1/profiles/${user.user.id}/consultant-schedulings`, {
-      headers: { Authorization: `JWT ${user.token}` },
+    // const lastDayThisMonth = new Date(year, month, 0).getDate();
+    microServiceApi.get(`v1/profiles/${user.user.id}/schedulings`, {
+      // headers: { Authorization: `JWT ${user.token}` },
       params: {
-        start_gte: `${year}-${month}-01T00:00:00-03:00`,
-        start_lte: `${year}-${month}-${lastDayThisMonth}T23:59:00-03:00`,
+        // start_gte: `${year}-${month}-01T00:00:00-03:00`,
+        // start_lte: `${year}-${month}-${lastDayThisMonth}T23:59:00-03:00`,
         done: done === false ? done : null,
       },
     }).then((response) => {
