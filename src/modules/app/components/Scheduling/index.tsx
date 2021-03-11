@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import clotheIcon from '../../assets/Roupa.png';
 import doneIcon from '../../assets/Concluido.png';
@@ -7,6 +8,7 @@ import { Container } from './styles';
 import ModalClient, { ModalClientProps } from '../ModalClient';
 
 const Scheduling: React.FC = () => {
+  const { push } = useHistory();
   const modalRef = useRef<ModalClientProps>(null);
 
   const handleOpenModal = useCallback(() => {
@@ -46,7 +48,7 @@ const Scheduling: React.FC = () => {
         Veja meu perfil completo
       </button>
 
-      <button type="button">
+      <button type="button" onClick={() => push('/look')}>
         Criar looks
       </button>
 
